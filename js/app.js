@@ -22,19 +22,6 @@ var ViewModel = function(){
 		return changeLevel(this.clickCount());
 	}, this);// why do I need 'this' keyword?  If I don't use 'this' returns undefine...
 
-	/*
-	this.catLevel = ko.computed({
-		read: function(){
-			return changeLevel(this.clickCount());
-		},
-		write: function(){
-			return changeLevel(this.clickCount());
-		},
-		owner: this
-		//console.log(changeLevel(this.clickCount()));
-	}); // why do I need 'this' keyword?  If I don't use 'this' returns undefine...
-	*/
-
 	this.name = ko.observable('Tabby');
 	this.imgSrc = ko.observable('img/22252709_010df3379e_z.jpg');
 	this.imgAttribution = ko.observable('Someone else image, I am just borrowing for this project');
@@ -44,18 +31,16 @@ var ViewModel = function(){
 	};
 
 	// Control flow
-
-	/*  Does not work..
-	ko.applyBindings({
-		nickname: [ 'Toby', 'Timmy', 'Tom', 'Tomy']
-	});
-	*/
+	this.nickname = ko.observableArray(
+		[ 'Toby', 'Timmy', 'Tom', 'Tomy']
+	);
+	/*
 	this.nickname = ko.observableArray([
 		{name: 'Toby'},
 		{name: 'Tommy'},
 		{name: 'Timmy'}
 	]);
-
+	*/
 };
 
 ko.applyBindings(new ViewModel);
