@@ -1,3 +1,40 @@
+var initialCats = [
+		{
+			'clickCount': 0,
+			'name': 'Timmy',
+			'imgSrc': 'img/cat_picture1.jpg',
+			'imgAttribution': 'img/cat_picture1.jpg',
+			'nickNames': ['clicky']
+		},
+		{
+			'clickCount': 0,
+			'name': 'Tom',
+			'imgSrc': 'img/cat_picture2.jpg',
+			'imgAttribution': 'img/cat_picture2.jpg',
+			'nickNames' : ['coby']
+		},
+		{
+			'clickCount': 0,
+			'name': 'Sevo',
+			'imgSrc': 'img/cat_picture3.jpg',
+			'imgAttribution': 'img/cat_picture3.jpg',
+			'nickNames': ['clippy']
+		},
+		{
+			'clickCount': 0,
+			'name': 'Steven',
+			'imgSrc': 'img/cat_picture4.jpg',
+			'imgAttribution': 'img/cat_picture4.jpg',
+			'nickNames' : ['choppy']
+		},
+		{
+			'clickCount': 0,
+			'name': 'stevy',
+			'imgSrc': 'img/cat_picture1.jpg',
+			'imgAttribution': 'img/cat_picture1.jpg',
+			'nickNames' : ['clamppy']
+		}
+	];
 
 var Cat = function(data){
 	this.clickCount = ko.observable(data.clickCount);
@@ -20,6 +57,7 @@ var Cat = function(data){
 	}, this);// why do I need 'this' keyword?  If I don't use 'this' returns undefine...
 
 	this.name = ko.observable(data.name);
+	console.log(data.imgSrc);
 	this.imgSrc = ko.observable(data.imgSrc);
 	this.imgAttribution = ko.observable(data.imgAttribution);
 
@@ -35,17 +73,25 @@ var Cat = function(data){
 	*/
 }
 
+// Make the cats show up in a list
+
+// Make the list clickable so currentCat can change when its clicked.
+
 var ViewModel = function(){
 	// self represent the view model
 	var self = this;
 
-	this.currentCat = ko.observable(new Cat({
-		clickCount: 0,
-		name: 'Tabby',
-		imgSrc: 'img/22252709_010df3379e_z.jpg',
-		imgAttribution : 'Someone else image, I am just borrowing for this project',
-		nickNames: ['Toby', 'Timmy', 'Tom', 'Tomy']
-	})	);
+	this.catList = ko.observableArray([]);
+
+	initialCats.forEach(function(catItem){
+		// console.log(catItem);
+		// catItem -> cat object from initialCats object literal
+
+		// self is always going to map to ViewModel ****
+		self.catList.push(new Cat(catItem));
+	});
+
+	this.currentCat = ko.observable( this.catList()[0] );
 
 	this.incrementCounter = function(){
 		//console.log('incrementCounter is clicked'+ this.currentCat());
