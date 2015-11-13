@@ -77,6 +77,7 @@ var Cat = function(data){
 
 // Make the list clickable so currentCat can change when its clicked.
 
+
 var ViewModel = function(){
 	// self represent the view model
 	var self = this;
@@ -97,6 +98,16 @@ var ViewModel = function(){
 		//console.log('incrementCounter is clicked'+ this.currentCat());
 		self.currentCat().clickCount(self.currentCat().clickCount() + 1);
 	};
+
+	// passing a "current item" as a parameter
+	// When calling your handler, Knockout will supply the current model value as the
+	// first parameter. This is particularly useful if you’re rendering some UI for
+	// each item in a collection, and you need to know which item’s UI was clicked
+
+	this.setCat = function(clickedCat){
+		// currentCat lives in the ViewModel, that is why we use self.
+		self.currentCat(clickedCat);
+	}
 
 
 };
